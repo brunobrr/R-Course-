@@ -1,4 +1,3 @@
-
 ##### Para quem esta apostila e escrita?
 # Esta apostila e destinada a pessoas que nunca tiveram nenhum contado previo com o R ou para 
 # aquelas pessoas que desejam aperfeicoar seus conhecimentos basicos. Nao tenho a intencao de  
@@ -10,7 +9,7 @@
 # Ser um bom usuario do R requer pratica, paciencia e perceveranca. Esta frase a primeira vista pode
 # soar desmotivadora, porem, nao e. Adquirimos conhecimento sobre algo mais naturalmente se tivermos estas
 # virtudes em mente. Aprender R talvez seja como aprender a tocar violao. E claro que voce nao conseguira
-# tocar a 5ª sinfonia de Bethoven com apenas uma semana de aula. Primeiro e importante conhecer as partes do
+# tocar a quinta sinfonia de Bethoven com apenas uma semana de aula. Primeiro e importante conhecer as partes do
 # violao, suas cordas, como posicionar os dedos, e comecar a praticar. Juntamente com a pratica e fundamental 
 # o conhecimento da teoria musical, para dar significado a pratica. As primeiras aulas sao sempre mais dificeis. 
 # Os dedos doem, ha o sentimento de que voce nao vai conseguir, a teoria e chata, etc. Aprender o R e como aprender 
@@ -20,7 +19,7 @@
 # Mas calma, respire! Todo o tempo investido no inicio em aprender o R vale a pena. Assim como aprender a tocar violao, 
 # com o tempo voce ficara familarizado com os comandos basicos e as coisas ficarao mais simples. 
 # Como disse, nao espero nesse curso inicial que voce seja um bom programador, assim como nao espero que em apenas uma 
-# semana de aula de viocao voce consiga tocar 5ª sinfonia de Bethoven. Posso dizer que nesse curso voce ira aprender
+# semana de aula de viocao voce consiga tocar 5? sinfonia de Bethoven. Posso dizer que nesse curso voce ira aprender
 # o basico sobre o R e sua linguagem; seguindo a analogia com o violao, apos esse curso espero que voce consiga tocar
 # "pra nao dizer que nao falei de flores" e "Bloowing in the wind", cancoes que a maioria dos alunos aprendem no inicio
 
@@ -48,7 +47,7 @@
 
 
 
-### O que é o R?
+### O que ? o R?
 
 
 ### Como e onde obter ajuda
@@ -71,7 +70,7 @@
 
 # Alem dos arquivos de ajuda proprios do R, existem muitos materiais de ajuda online. Caso voce tenha duvida sobre uma uma
 # funcao, sobre um erro que surgiu, ou ainda se voce nao tem a minima ideia de como fazer algo no R, digite no Google 
-# "Using lm funcion in r". Sei que soa como clichê, mas realmente ajuda. Alem disso, o site "Stack Overflow"
+# "Using lm funcion in r". Sei que soa como clich?, mas realmente ajuda. Alem disso, o site "Stack Overflow"
 # e uma execelente fonte de respostas sobre suas duvidas. Tente: "How to create a raster from a dataframe in r?" 
 
 
@@ -106,10 +105,10 @@ library(vegan)
 # 4. escolha fazer download do programa para Linux, Mac ou Windows; 
 # 5. clique em "install R for the first time" e, por fim em;
 # 6. "Download R 3.3.3 for Windows";
-# Proceda com a instalação do programa
+# Proceda com a instala??o do programa
 
-# O Rstudio oferece opções visuais que facilitam o aprendizado e a escrita de códigos. Assim, recomendo fortemente
-# que você use o Rstudio. 
+# O Rstudio oferece op??es visuais que facilitam o aprendizado e a escrita de c?digos. Assim, recomendo fortemente
+# que voc? use o Rstudio. 
 # Mas ainda assim e preciso ter o R instalado.
 
 # 1. Faca o download do RStudio em https://www.rstudio.com/products/rstudio/download/;
@@ -131,7 +130,7 @@ library(vegan)
 # comando abaixo o objeto nomeado "a" armazena a informacao "2", um vetor numerico.
 
 
-# Usamos o sinal de atribuição "<-" para atribuir uma informacao a um objeto 
+# Usamos o sinal de atribui??o "<-" para atribuir uma informacao a um objeto 
 a <- 2 
 
 # Um exemplo de uma funcao armazenada no objeto "x
@@ -549,7 +548,7 @@ m1[5] # retorna o quinto elemento da matriz
 m1[2,2] # elemento da segunda linha e segunda coluna
 m1[,2] #  segunda coluna
 m1[1,] # primeira linha
-m1[1:3,] # três primeiras linhas
+m1[1:3,] # tr?s primeiras linhas
 m1[1,2] + m1[5,1]
 
 
