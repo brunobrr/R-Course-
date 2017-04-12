@@ -1,0 +1,157 @@
+---
+title: "Curso R"
+author: "Bruno R Ribeiro"
+date: "April 11, 2017"
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+  word_document:
+    toc: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Sumário 
+
+### Parte 1 - Introducao
+O que e R
+Vantagens e desvantagens
+Baixando e instalando o R
+Uma impressão inicial
+Como instalar e carregar um pacote
+Nomear objetos
+Como usar funções
+Como e onde obter ajuda
+
+
+### Parte 2 - Primeiros passos
+Tipos básicos de dados usados em R (números, caracteres,lógicos, valores especiais)
+Principais classes de objetos usados em R
+vetores
+matrizes
+Data frame
+Listas
+
+
+# Parte 1 - Introducao
+## Para quem esta apostila é escrita?
+Esta apostila é destinada a pessoas que nunca tiveram nenhum contado prévio com o R ou para 
+aquelas pessoas que desejam aperfeiçoar seus conhecimentos básicos. Não temos a intenção de  
+ir a fundo em assuntos complexos e avançados de programação e estatística. 
+Alias, este não e um curso de estatística. Apesar de R ser um software para tal fim, 
+acreditamos que o aprendizado da linguagem básica de programação em R não deve ser ministrado em conjunto com 
+um curso de estatística. 
+
+Ser um bom usuário do R requer prática, paciência e perseverança. Esta frase pode soar desmotivadora a à primeira vista, porém, não e. Adquirimos conhecimento sobre algo mais naturalmente se tivermos estas
+virtudes em mente. Aprender R talvez seja como aprender a tocar violão. É claro que você não conseguirá
+tocar a quinta sinfonia de Beethoven com apenas uma semana de aula. Primeiro e importante conhecer as partes do
+violão, suas cordas, como posicionar os dedos, e começar a praticar. Juntamente com a pratica e fundamental 
+o conhecimento da teoria musical, para dar significado a pratica. As primeiras aulas são sempre mais difíceis. 
+Os dedos doem, ha o sentimento de que você não vai conseguir, a teoria e chata, etc. Aprender o R e como aprender 
+a tocar violão. Você ira passar pela etapa de conhecer a logica de programação e o funcionamento do R, 
+aprender seus conceitos básicos, se entusiasmar e também pensar em desistir quando achar
+que o R e muito chato e que não vale a pena "perder tempo" aprendo algo que você pode fazer rapidamente no Excel. 
+Mas calma, respire! Todo o tempo investido no inicio em aprender o R vale a pena. Assim como aprender a tocar violão, 
+com o tempo você ficara familiarizado com os comandos básicos e as coisas ficarão mais simples. 
+Não esperamos que nesse curso inicial que você seja um bom programador, da mesma forma que em apenas uma 
+semana de aula de violão você consiga tocar quinta sinfonia de Beethoven. Nesse curso você irá aprender
+o básico sobre o R e sua linguagem; seguindo a analogia com o violão,  esperamos que após esse curso que você consiga tocar
+"pra não dizer que não falei de flores" e "Bloowing in the wind", canções que a maioria dos alunos aprendem no inicio
+
+
+### O que é o R?
+
+
+### Vantagens e desvantagens
+
+
+### Baixando e instalando o R
+Para fazer o download o programa siga os seguintes passos:
+1. na pagina https://www.r-project.org/ clique;
+2. "download R";
+3. escolha um Cran do Brasil;
+4. escolha fazer download do programa para Linux, Mac ou Windows; 
+5. clique em "install R for the first time" e, por fim em;
+6. "Download R 3.3.3 for Windows";
+Proceda com a instalação do programa
+
+O Rstudio oferece opções visuais que facilitam o aprendizado e a escrita de códigos. Assim, recomendo fortemente
+que você use o Rstudio. 
+Mas ainda assim e preciso ter o R instalado.
+
+1. Faca o download do RStudio em https://www.rstudio.com/products/rstudio/download/;
+2. escolha fazer download do programa para Linux, Mac, Windows ou Fedora;
+
+
+### Uma impressao inicial
+**Janela Script**
+Um script é uma sequencia de comandos para serem executados por um programa e ficam gravados em um arquivo. Usamos um script para escrever e salvar nossos códigos.
+
+Para carregar um novo script
+"File" > "New File" > R Script.
+
+Para salvar o seu script
+clique no disquete.
+
+Carregar script que já está no seu computador
+"File" > "open file"
+escolha seu script
+
+
+*janela console* 
+```{r}
+12 + 23 # soma de dois números
+```
+
+
+**Janela Environment**
+Local (memória) para guardar variáveis
+```{r}
+exemplo <- "Meus dados"
+rm(exemplo)
+```
+
+
+**Janela de resultados gráficos**
+files: os arquivos e pastas da área default
+plots: Visualização de gráficos e imagens
+```{r}
+plot(1:10, 1:10) # janela plots
+```
+
+```{r}
+x <- seq(5, 15, length = 1000)
+y <- dnorm(x, mean = 10, sd = 3)
+plot(x, y, type = "l", lwd = 1)
+```
+
+
+
+### Como instalar e carregar um pacote
+As funções do R são escritas e disponibilizadas na forma de "pacotes". Um pacote geralmente e criado para um fim especifico e contem um conjunto de funções. Por exemplo, o pacote "ggplot2" contem  funções para criar e manipular gráficos. 
+
+
+```{r}
+install.packages("raster") # comando para instalar o pacote raster
+library(raster)            # comando para carregar o pacote raster
+```
+
+Uma vez instalados, os pacotes ficam armazenados na memoria do computador. Entretanto, com exceção dos pacotes básicos do R, ao iniciar uma nova seção do sempre temos que carregar  os pacotes que iremos usar usando a função library(...)
+*Dica:* mantenha no inicio do script uma lista de pacotes que devem ser carregados. Por exemplo:
+
+```{r}
+install.packages("raster")  lembre - se:uma vez instalado nao e necessario instalar o pacote novamente quando abrir o R
+install.packages("maptolls")
+install.packages("vegan")
+
+library(raster)  # lembre-se:e preciso carregar os pacotes toda vez que inicar o RStudio
+library(maptools)
+library(vegan)
+```
+
+
+
+   
