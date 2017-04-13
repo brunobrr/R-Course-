@@ -3,6 +3,8 @@ title: "Curso R"
 author: "Bruno R Ribeiro"
 date: "April 11, 2017"
 output:
+  pdf_document:
+    toc: yes
   html_document:
     toc: yes
     toc_float: yes
@@ -17,23 +19,23 @@ knitr::opts_chunk$set(echo = TRUE)
 # Sumário 
 
 ### Parte 1 - Introducao
-O que e R
-Vantagens e desvantagens
-Baixando e instalando o R
-Uma impressão inicial
-Como instalar e carregar um pacote
-Nomear objetos
-Como usar funções
-Como e onde obter ajuda
+* O que e R
+* Vantagens e desvantagens
+* Baixando e instalando o R
+* Uma impressão inicial
+* Como instalar e carregar um pacote
+* Nomear objetos
+* Como usar funções
+* Como e onde obter ajuda
 
 
 ### Parte 2 - Primeiros passos
-Tipos básicos de dados usados em R (números, caracteres,lógicos, valores especiais)
-Principais classes de objetos usados em R
-vetores
-matrizes
-Data frame
-Listas
+- Tipos básicos de dados usados em R (números, caracteres,lógicos, valores especiais)
+- Principais classes de objetos usados em R
+- vetores
+- Matrizes
+- Data frame
+- Listas
 
 
 # Parte 1 - Introducao
@@ -70,6 +72,7 @@ o básico sobre o R e sua linguagem; seguindo a analogia com o violão,  esperam
 
 ### Baixando e instalando o R
 Para fazer o download o programa siga os seguintes passos:
+
 1. na pagina https://www.r-project.org/ clique;
 2. "download R";
 3. escolha um Cran do Brasil;
@@ -90,15 +93,11 @@ Mas ainda assim e preciso ter o R instalado.
 **Janela Script**
 Um script é uma sequencia de comandos para serem executados por um programa e ficam gravados em um arquivo. Usamos um script para escrever e salvar nossos códigos.
 
-Para carregar um novo script
-"File" > "New File" > R Script.
-
-Para salvar o seu script
-clique no disquete.
-
-Carregar script que já está no seu computador
-"File" > "open file"
-escolha seu script
+Para criar um novo script ou carregar um script 
+1. "File" 
+2. "New File" ou "Open File"
+3. R Script
+4. Para salva-lo, clique no disquete.
 
 
 *janela console* 
@@ -134,7 +133,7 @@ plot(x, y, type = "l", lwd = 1)
 As funções do R são escritas e disponibilizadas na forma de "pacotes". Um pacote geralmente e criado para um fim especifico e contem um conjunto de funções. Por exemplo, o pacote "ggplot2" contem  funções para criar e manipular gráficos. 
 
 
-```{r}
+```{r eval = FALSE}
 install.packages("raster") # comando para instalar o pacote raster
 library(raster)            # comando para carregar o pacote raster
 ```
@@ -142,8 +141,8 @@ library(raster)            # comando para carregar o pacote raster
 Uma vez instalados, os pacotes ficam armazenados na memoria do computador. Entretanto, com exceção dos pacotes básicos do R, ao iniciar uma nova seção do sempre temos que carregar  os pacotes que iremos usar usando a função library(...)
 *Dica:* mantenha no inicio do script uma lista de pacotes que devem ser carregados. Por exemplo:
 
-```{r}
-install.packages("raster")  lembre - se:uma vez instalado nao e necessario instalar o pacote novamente quando abrir o R
+```{r eval = FALSE}
+install.packages("raster") # lembre - se:uma vez instalado nao e necessario instalar o pacote novamente quando abrir o R
 install.packages("maptolls")
 install.packages("vegan")
 
@@ -153,5 +152,144 @@ library(vegan)
 ```
 
 
+### Como criar um objeto
+Variáveis, dados, funções, resultados são armazenados no R na forma de objetos que possuem um nome. Estes
+objetos podem ser manipulados por de operações (aritmética, lógica, comparações) e funções. Por exemplo, na linha de 
+comando abaixo o objeto com nome "a" armazena a informação "2", um vetor numérico.
 
-   
+Utilizamos o sinal "<-" para atribuir uma informação a um objeto   
+```{r}
+a <- 1
+soma <- 45 * 765
+```
+
+Um exemplo de uma funcao armazenada no objeto "x
+```{r}
+x <- function(a) {
+  a + 5
+}
+x(a)
+```
+
+Note que sempre que um novo objeto é criado ele é armazenado no "Environment" (Parte direita superior da tela).
+Para rodar o código acima basta colocar o curso em cima da linha do código e clicar em **Run** ou **Ctrl + Enter**. 
+Note que quando executamos um código o resultado é mostrado no "Console" (Parte inferior da tela). 
+Para visualizar o conteúdo de um objeto basta executar apenas seu nome. 
+
+Quando digitamos "a", temos o seguinte resultado:
+```{r}
+a # O numero entre parenteses indica posicao dos elementos do objeto
+```
+
+Importante, o nome de todos os objetos deve sempre começar como uma letra e pode incluir outros caracteres
+números, underline (_) e ponto (.). Além disso, o R diferencia entre letras maiúsculas e minúsculas. Faça o teste, execute os seguintes comandos: 
+
+
+```{r}
+a
+```
+
+```{r eval= FALSE}
+A # Este erro ocorre porque o objeto "A" nao existe
+```
+
+**Dica:** Use Hashtag (#) para fazer anotações. As linhas de comando que começam com "#" não são executadas.
+**Mais uma dica:** não use acentos e caracteres especiais tais como cedilha, tiu, barras, etc, ao escrever seus códigos
+
+Usamos a funcao "c" para concatenar (agrupar) caracteres ou números em um vetor. Os elementos de um vetor devem estar dentro de parênteses () e separados por vírgula (,) 
+```{r}
+i <- 1234
+ii <- c(1234, 73455)
+letras <- c("este", 'e', 'um', 'vetor', 'de', 'caracteres') 
+amigos <-c("nelson", "guilherme", "andre")
+idade <- c(27, 38, 26)
+```
+
+Nomear um objeto é importante. Note que a linha de comando abaixo não foi salva
+```{r results='hide'}
+matrix((((sqrt(1234*2)^2)/3*18/3-23)^2) * (((sqrt(1234*2)^2)/3*18/3-23)/12),4,5)
+```
+
+Agora o resultado é salvo na forma de um objeto
+```{r results='hide'}
+mat <- matrix((((sqrt(1234*2)^2)/3*18/3-23)^2) * (((sqrt(1234*2)^2)/3*18/3-23)/12),4,5)
+```
+
+
+## Faça você mesmo ##
+
+Crie um objeto chamado "b" e salve o valor 15 nesse objeto
+```{r}
+b <- 15
+```
+
+* crie um objeto chamado "c" e grave o valor de 0.1
+* crie um objeto chamado "d" e grave o valor de 0,1
+* crie um objeto chamado "e" e grave o valor de 10 + 2
+* crie um objeto chamado "E" e grave o valor de 20 * 3
+* grave a soma do objeto "e"" e "E"" em um vetor chamado "resul"
+
+**Dica:** sempre use ponto ao invés de vírgula para escrever números não inteiros
+
+Escrever em R e como escrever uma receita para outra pessoa, vc tem que dar todos os passos na ordem certa,
+senão a receita provavelmente não vai funcionar.
+Por exemplo, vamos escrever passo-a-passo como calcular a media do objeto "idade":
+
+Tenha em mente que media nada mais e do que a soma dos valores divido pelo numero de valores. Sendo assim precisamos:
+
+1. somar todos os valores do objeto idade
+2. dividir a soma dos valores por 3
+
+```{r}
+soma.idade <- 27 + 38 + 26
+soma.idade
+```
+
+
+```{r}
+media <- soma.idade / 3
+media
+```
+
+
+O R tambem possui funções pré-definidas. Tente a seguinte função:
+```{r}
+mean(idade)
+```
+
+
+### Como e onde obter ajuda
+É rotineiro no início (e não apenas no inicio...) não saber como escrever ou usar uma funcao. Para isso, existem
+vários materias de ajuda disponíveis no próprio R e também muitos materiais disponíveis online.  
+Vamos aprender como pedir ajuda!
+
+```{r}
+?mean() # veja a pagina de ajuda da função "media"
+```
+
+Veja que na aba "Help" surgiu o arquivo de ajuda na função "mean". De forma geral, o arquivo de ajuda contem:
+
+* _Description_: uma descrição da função
+* _Usage_: o nome da função e seus possíveis argumentos. Nem todos argumentos precisam serem inseridos na função para que ela funcione. Além disso,você pode mudar um argumento de acordo com as opções oferecidas pela função;
+* _Details_: uma descrição detalhada da função;
+* _Value_: Diferente das informações acima, o essa seção não e comum em todas funções do R. Neste caso, ela indica uma
+descrição dos argumentos da função;
+* _See also_: página de ajuda de funções similares a que você esta usando;
+* _Examples_: Exemplos executáveis do uso da função. Dica: copie e cole este exemplos no script e execute cada linha para aprender de forma mais detalhada como usar a função.
+
+Além dos arquivos de ajuda próprios do R, existem muitos materiais de ajuda online. Caso você tenha dúvida sobre uma uma
+função, sobre como resolver um erro que surgiu, ou ainda se não tiver a mínima ideia de como fazer algo no R, digite no Google _"Using mean funcion in r"_. Sei que soa como clichê, mas realmente ajuda. Além disso, o site **"Stack Overflow"** é uma excelente fonte de respostas sobre suas dúvidas. Tente _"How to calculate mean of a vector in r?"_
+
+
+### Parte 1 - Exercícios
+1. Instale e carregue o pacote "LetsR" no seu computador.    
+2. Crie um objeto com nome "num" com números de 1 a 10.    
+3. Crie um objeto com nome "letras" com cinco nomes diferentes.    
+4. Calcule a media do objeto "num".  
+6. Qual a soma de 2665 mais 7554. Salve o resultado em um objeto.  
+7. Crie um objeto com nome "vec.2" com seguintes valores (1,15,25,30,NA,50,51,NA,48). Use o arquivo de ajuda
+da função usada para calcular a soma (sum) desses valores e para excluir os valores "NA".  
+8. Use a função length() no objeto vec.2. O que significa o valor retornado?  
+9. Crie um objeto com nome "r" contendo os números 1,2 e 3 repetidos 100 vezes (ex. 1,2,3,1,2,3...).Dica: use a função
+"rep" para resolver este exercício.  
+
