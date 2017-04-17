@@ -1,0 +1,1274 @@
+---
+title: "Curso R"
+author: "Bruno R Ribeiro"
+date: "April 11, 2017"
+output:
+  pdf_document:
+    toc: yes
+  html_document:
+    toc: yes
+    toc_float: yes
+  word_document:
+    toc: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<!-- # Sumário  -->
+
+<!-- # Parte 1 - Introducao -->
+<!-- * O que e R -->
+<!-- * Vantagens e desvantagens -->
+<!-- * Baixando e instalando o R -->
+<!-- * Uma impressão inicial -->
+<!-- * Como instalar e carregar um pacote -->
+<!-- * Nomear objetos -->
+<!-- * Como usar funções -->
+<!-- * Como e onde obter ajuda -->
+
+
+<!-- # Parte 2 - Primeiros passos -->
+<!-- - Tipos básicos de dados usados em R (números, caracteres,lógicos, valores especiais) -->
+<!-- - Principais classes de objetos usados em R -->
+<!-- - vetores -->
+<!-- - Matrizes -->
+<!-- - Data frame -->
+<!-- - Listas -->
+
+<!-- # Parte 3 - Indexação -->
+
+
+# Parte 1 - Introducao
+## Para quem esta apostila é escrita?
+Esta apostila é destinada a pessoas que nunca tiveram nenhum contado prévio com o R ou para 
+aquelas pessoas que desejam aperfeiçoar seus conhecimentos básicos. Não temos a intenção de  
+ir a fundo em assuntos complexos e avançados de programação e estatística. 
+Aliás, este não e um curso de estatística. Apesar de R ser um software para tal fim, 
+acreditamos que o aprendizado da linguagem básica de programação em R não deve ser ministrado em conjunto com 
+um curso de estatística. 
+
+Ser um bom usuário do R requer prática, paciência e perseverança. Esta frase pode soar desmotivadora à primeira vista, porém, não e. Adquirimos conhecimento sobre algo mais naturalmente se tivermos estas
+virtudes em mente. Aprender R talvez seja como aprender a tocar violão. É claro que você não conseguirá
+tocar a 5ª sinfonia de Beethoven com apenas uma semana de aula. Primeiro e importante conhecer as partes do
+violão, suas cordas, como posicionar os dedos, e começar a praticar. As primeiras aulas são sempre mais difíceis. 
+Os dedos doem, ha o sentimento de que você não vai conseguir, a teoria e chata, etc. Aprender o R e como aprender 
+a tocar violão. Você ira passar pela etapa de conhecer a logica de programação e o funcionamento do R, 
+aprender seus conceitos básicos, se entusiasmar e também pensar em desistir quando achar
+que o R e muito chato e que não vale a pena "perder tempo" aprendo algo que você pode fazer rapidamente no Excel. 
+Mas calma, respire! Todo o tempo investido no início em aprender o R vale a pena. Assim como aprender a tocar violão, 
+com o tempo você ficara familiarizado com os comandos básicos e as coisas ficarão mais simples. 
+Não esperamos que nesse curso inicial que você seja um bom programador, da mesma forma que em apenas uma 
+semana de aula de violão você consiga tocar quinta sinfonia de Beethoven. Nesse curso você irá aprender
+o básico sobre o R e sua linguagem; aprender a "posicionar os dedos", "alguns acordes" e a partir daí, no futuro, e com a prática você poderá até tocar a 5ª sinfonia "no R"!
+
+
+## O que é o R?
+
+
+## Vantagens e desvantagens
+
+
+## Baixando e instalando o R
+Para fazer o download o programa siga os seguintes passos:
+
+1. na pagina do [R Project] (https://www.r-project.org/) clique;
+2. "download R";
+3. escolha um Cran do Brasil;
+4. escolha fazer download do programa para Linux, Mac ou Windows; 
+5. clique em "install R for the first time" e, por fim em;
+6. "Download R 3.3.3 for Windows";
+Proceda com a instalação do programa
+
+O Rstudio oferece opções visuais que facilitam o aprendizado e a escrita de códigos. Assim, recomendo fortemente
+que você use o Rstudio. 
+Mas ainda assim e preciso ter o R instalado.
+
+1. Faca o download do RStudio em https://www.rstudio.com/products/rstudio/download/;
+2. escolha fazer download do programa para Linux, Mac, Windows ou Fedora;
+
+
+## Uma impressao inicial
+**Janela Script**
+Um script é uma sequencia de comandos para serem executados por um programa e ficam gravados em um arquivo. Usamos um script para escrever e salvar nossos códigos.
+
+Para criar um novo script ou carregar um script  
+1. "File"     
+2. "New File" ou "Open File"  
+3. R Script  
+4. Para salva-lo, clique no disquete.  
+
+
+**Janela console** 
+```{r}
+12 + 23 # soma de dois números
+```
+
+
+**Janela Environment**
+Local (memória) para guardar variáveis
+```{r}
+exemplo <- "Meus dados"
+rm(exemplo)
+```
+
+
+**Janela de resultados gráficos**
+files: os arquivos e pastas da área default
+plots: Visualização de gráficos e imagens
+```{r}
+plot(1:10, 1:10) # janela plots
+```
+
+
+```{r}
+x <- seq(5, 15, length = 1000)
+y <- dnorm(x, mean = 10, sd = 3)
+plot(x, y, type = "l", lwd = 1)
+```
+
+
+
+## Como instalar e carregar um pacote
+As funções do R são escritas e disponibilizadas na forma de "pacotes". Um pacote geralmente e criado para um fim especifico e contem um conjunto de funções. Por exemplo, o pacote "ggplot2" contem  funções para criar e manipular gráficos. 
+
+
+```{r eval = FALSE}
+install.packages("raster") # comando para instalar o pacote raster
+library(raster)            # comando para carregar o pacote raster
+```
+
+
+Uma vez instalados, os pacotes ficam armazenados na memoria do computador. Entretanto, com exceção dos pacotes básicos do R, ao iniciar uma nova seção do sempre temos que carregar  os pacotes que iremos usar usando a função library(...)
+**DICA** mantenha no inicio do script uma lista de pacotes que devem ser carregados. Por exemplo:
+
+
+```{r eval = FALSE}
+install.packages("raster") # lembre-se:uma vez instalado nao e necessário instalar o pacote novamente quando abrir o R
+install.packages("maptolls")
+install.packages("vegan")
+
+library(raster)  # lembre-se: é preciso carregar os pacotes toda vez que inicar o RStudio
+library(maptools)
+library(vegan)
+```
+
+
+## Como criar um objeto
+Variáveis, dados, funções, resultados são armazenados no R na forma de objetos que possuem um nome. Estes
+objetos podem ser manipulados por de operações (aritmética, lógica, comparações) e funções. Por exemplo, na linha de 
+comando abaixo o objeto com nome "a" armazena a informação "2", um vetor numérico.
+
+Utilizamos o sinal "<-" para atribuir uma informação a um objeto   
+```{r}
+a <- 1
+soma <- 45 * 765
+```
+
+
+Um exemplo de uma função armazenada no objeto "x
+```{r}
+x <- function(a) {
+  a + 5
+}
+x(a)
+```
+
+
+Note que sempre que um novo objeto é criado ele é armazenado no "Environment" (Parte direita superior da tela).
+Para rodar o código acima basta colocar o curso em cima da linha do código e clicar em **Run** ou **Ctrl + Enter**. 
+Note que quando executamos um código o resultado é mostrado no "Console" (Parte inferior da tela). 
+Para visualizar o conteúdo de um objeto basta executar apenas seu nome. 
+
+
+Quando digitamos "a", temos o seguinte resultado:
+```{r}
+a # O número entre parênteses indica a posição dos elementos no objeto
+```
+
+
+Importante, o nome de todos os objetos deve sempre começar como uma letra e pode incluir outros caracteres
+números, underline (_) e ponto (.). Além disso, o R diferencia entre letras maiúsculas e minúsculas. Faça o teste, execute os seguintes comandos: 
+
+
+```{r}
+a
+```
+
+
+```{r eval= FALSE}
+A # Este erro ocorre porque o objeto "A" nao existe
+```
+
+
+**DICA:** Use Hashtag (#) para fazer anotações. As linhas de comando que começam com "#" não são executadas.  
+**MAIS UM DICA:** não use acentos e caracteres especiais tais como cedilha, tiu, barras, etc, ao escrever seus códigos
+
+
+Usamos a função "c" para concatenar (agrupar) caracteres ou números em um vetor. Os elementos de um vetor devem estar dentro de parênteses () e separados por vírgula (,) 
+```{r}
+i <- 1234
+ii <- c(1234, 73455)
+letras <- c("este", 'e', 'um', 'vetor', 'de', 'caracteres') 
+amigos <-c("nelson", "guilherme", "andre")
+idade <- c(27, 38, 26)
+```
+
+
+Nomear um objeto é importante. Note que a linha de comando abaixo não foi salva
+```{r results='hide'}
+matrix((((sqrt(1234*2)^2)/3*18/3-23)^2) * (((sqrt(1234*2)^2)/3*18/3-23)/12),4,5)
+```
+
+
+Agora o resultado é salvo na forma de um objeto
+```{r results='hide'}
+mat <- matrix((((sqrt(1234*2)^2)/3*18/3-23)^2) * (((sqrt(1234*2)^2)/3*18/3-23)/12),4,5)
+```
+
+
+** Faça você mesmo! **
+
+Crie um objeto chamado "b" e salve o valor 15 nesse objeto
+```{r}
+b <- 15
+```
+
+
+* crie um objeto chamado "c" e grave o valor de 0.1
+* crie um objeto chamado "d" e grave o valor de 0,1
+* crie um objeto chamado "e" e grave o valor de 10 + 2
+* crie um objeto chamado "E" e grave o valor de 20 * 3
+* grave a soma do objeto "e"" e "E"" em um vetor chamado "resul"
+
+
+**DICA:** sempre use ponto ao invés de vírgula para escrever números não inteiros
+
+
+Escrever em R e como escrever uma receita para outra pessoa, você tem que dar todos os passos na ordem certa,
+senão a receita provavelmente não vai funcionar.
+Por exemplo, vamos escrever passo-a-passo como calcular a media do objeto "idade":
+
+Tenha em mente que media nada mais e do que a soma dos valores divido pelo numero de valores. Sendo assim precisamos:
+
+1. somar todos os valores do objeto idade
+2. dividir a soma dos valores por 3
+
+```{r}
+soma.idade <- 27 + 38 + 26
+soma.idade
+```
+
+
+```{r}
+media <- soma.idade / 3
+media
+```
+
+
+O R também possui funções pré-definidas. Tente a seguinte função:
+```{r}
+mean(idade)
+```
+
+
+## Como e onde obter ajuda
+É rotineiro no início (e não apenas no inicio...) não saber como escrever ou usar uma função. Para isso, existem
+vários materiais de ajuda disponíveis no próprio R e também muitos materiais disponíveis online.  
+Vamos aprender como pedir ajuda!
+
+
+```{r eval= FALSE}
+?mean() # veja a pagina de ajuda da função "media"
+```
+
+
+Veja que na aba "Help" surgiu o arquivo de ajuda na função "mean". De forma geral, o arquivo de ajuda contem:
+
+* _Description_: uma descrição da função
+* _Usage_: o nome da função e seus possíveis argumentos. Nem todos argumentos precisam serem inseridos na função para que ela funcione. Além disso,você pode mudar um argumento de acordo com as opções oferecidas pela função;
+* _Details_: uma descrição detalhada da função;
+* _Value_: Diferente das informações acima, o essa seção não e comum em todas funções do R. Neste caso, ela indica uma
+descrição dos argumentos da função;
+* _See also_: página de ajuda de funções similares a que você esta usando;
+* _Examples_: Exemplos executáveis do uso da função. **DICA**: copie e cole este exemplos no script e execute cada linha para aprender de forma mais detalhada como usar a função.
+
+Além dos arquivos de ajuda próprios do R, existem muitos materiais de ajuda online. Caso você tenha dúvida sobre uma uma
+função, sobre como resolver um erro que surgiu, ou ainda se não tiver a mínima ideia de como fazer algo no R, digite no Google _"Using mean funcion in r"_. Sei que soa como clichê, mas realmente ajuda. Além disso, o site **"Stack Overflow"** é uma excelente fonte de respostas sobre suas dúvidas. Tente _"How to calculate mean of a vector in r?"_
+
+-------------------------------------------------------------------------------------------------------------
+### Parte 1 - Exercícios  
+
+1. Instale e carregue o pacote "LetsR" no seu computador.    
+2. Crie um objeto com nome "num" com números de 1 a 10.    
+3. Crie um objeto com nome "letras" com cinco nomes diferentes.    
+4. Calcule a media do objeto "num".  
+6. Qual a soma de 2665 mais 7554. Salve o resultado em um objeto.  
+7. Crie um objeto com nome "vec.2" com seguintes valores (1,15,25,30,NA,50,51,NA,48). Use o arquivo de ajuda
+da função usada para calcular a soma (sum) desses valores e para excluir os valores "NA".  
+8. Use a função length() no objeto vec.2. O que significa o valor retornado?  
+9. Crie um objeto com nome "r" contendo os números 1,2 e 3 repetidos 100 vezes (ex. 1,2,3,1,2,3...).  
+**DICA**: use a função _"rep"_ para resolver este exercício.  
+-------------------------------------------------------------------------------------------------------------
+
+
+# Parte 2 - Primeiros passos
+
+## Tipos básicos de dados usados em R
+Há quatro **tipos** de dados geralmente usados no R:  
+
+1.numéricos - números   
+2.caracteres - texto, palavras   
+3.lógicos (TRUE or FALSE)   
+4.Valores especiais - NA, Inf, NULL  
+
+
+Há quatro tipos básicos de **classes** de objetos usados em R  
+
+1. vector: 1 dimensão; numéricos, categóricos ou lógicos  
+2. factor: 1 dimensão; níveis de uma variável categórica  
+3. matrix: 2 dimensões; vetores de um mesmo tipo (ex. numéricos) organizados em linhas e colunas  
+4. Data frame: 2 dimensões; mesmo que matriz, mas pode conter vetores numéricos, categóricos ou lógicos  
+5. Lista: Pode conter objetos de diferentes tamanhos, tipos e classes  
+
+<!-- ######################## Inserir a figura ilustrativa ################################## -->
+
+## Vetores
+Vetores nada mais são do que uma sequencia linear de elementos (numéricos, ou categóricos, ou lógicos)
+
+### Vetores numéricos
+
+```{r}
+v1 <- 7
+v1
+```
+
+
+Use a função _"class"_ para descobrir o tipo de objeto (numérico, caractere, lógico)
+```{r}
+class(v1)
+```
+
+
+A função "str" e similar a função "class" e indica o tipo, o tamanho, e os elementos de um objeto
+
+
+```{r}
+v2 <- c(9.5, 7.1, 8, 2, 3.3, 5.4, 10.5)
+v2
+class(v2)
+str(v2)
+```
+
+
+Algumas operações matemáticas usando vetores salvos como objetos
+```{r}
+v30 <- c(1, 2, 3, 4)
+v31 <- 1
+v30 + v31 # quando os vetores têm tamanhos diferentes o vetor menor é repetido até o tamanho do vetor maior
+```
+
+
+```{r eval=FALSE}
+rm(v30,v31) # use a função "rm" para remover um objeto
+
+v1 / v2 # divisao
+v1 * v2 # multiplicacao
+log(v1) # logaritmo
+exp(v1) # expoente
+round(v2) # arredondar um numero
+sort(v2) # Ordenar em order crescente
+mean(v3.1) # media
+sum(v3.1) # soma
+max(v3.1) # maximimo
+min(v3.1) # minimo
+quantile(v3.1) # quartis
+```
+
+
+** Faça você mesmo! **
+
+Use o arquivo de ajuda _?sort_ e descubra como ordenar o vetor abaixo em ordem decrescente
+```{r}
+v3.1 <- c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15)
+```
+
+
+** Funções úteis **
+
+O sinal ":" ou "sequencia"  indica uma sequencia de 1 a 15
+```{r}
+v3 <- 1:15
+v3
+v3.1 <-
+c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15) # igual ao comando anterior
+class(v3.1)
+```
+
+
+### Vetores de texto (caracteres) 
+
+```{r}
+amigos <- c("nelson", "rafa", "Andre", "ab")
+class(amigos)
+str(amigos)
+```
+
+
+Usamos aspas (duplas "" ou únicas '') para escrever caracteres
+```{r}
+c <- c('a', "ab", 'abc', "abcd")
+```
+
+
+```{r}
+c0.gen <- "Ocotea"
+c0.spp <- "odorifera"
+```
+
+
+Usamos a função "paste" para concatenar vetores de texto
+```{r}
+paste(c0.gen, c0.spp)
+paste(c0.gen, c0.spp, sep = "_") 
+```
+
+
+Se você ficou com dúvida sobre o argumento _"sep"_, peça ajuda: _?paste_
+```{r}
+c1 <- c("a", "b", 'c', "d", 'e')
+class(c1)
+str(c1)
+length(c1)
+```
+
+
+### Vetores Categóricos  
+
+Vetores categóricos ou fatores são um tipo especial de vetores de caracteres. Alguns exemplos de categorias. Desempenho dos alunos no curso do R (bom, regular, baixo); horas de estudo (1,4,8, >12); analfabetismo (crianças, jovens, adultos)
+```{r}
+c2 <- c("baixo", "medio", "alto", "extremamente alto")
+c2
+class(c2)
+length(c2) # tamanho de c2
+```
+
+
+```{r}
+c3 <- as.factor(c2) # Usamos a função "as.factor" para transformar vetores categóriocas em fatores, ou melhor, categorias
+c3   # fatores sao categorias
+class(c3)
+```
+
+
+```{r}
+c4 <- rep(1:20, each = 3) # Use a função "rep" para criar repetições
+c4
+```
+
+
+```{r}
+c5 <- as.factor(c4)
+c5
+str(c5) # note que agora, por exemplo, 1 nao e um numero e sim uma categoria
+class(c5) 
+```
+
+        
+
+### Vetores lógicos
+De forma simples: vetores lógicos são vetores de _TRUE_ ou _FALSE_ (verdadeiro ou falso, em português). São utilizados para avaliar se uma condição lógica é verdadeira ou falsa. Vamos analisar alguns exemplos:
+
+```{r}
+num<- c(1,5,10) # vetor numérico
+num
+```
+
+
+```{r}
+log <- num > 1 # vetor lógico
+log
+
+```
+
+
+```{r}
+num[log] # um vetor logico (T e F) indicam a POSICAO para selecionarmos elementos em um vetor. Somente os elementos _TRUE_ serão retornados
+```
+
+
+```{r}
+quais <- num > 1
+quais
+class(quais)
+res <- num[quais]
+res
+class(res)
+```
+
+
+```{r}
+c7 <- c('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h')
+c8 <- c('a', 'f')
+```
+
+
+```{r}
+quais <- c8 == c7 # quais elementos são comuns dos dois vetores?
+class(quais)
+iguais <- c7[quais] # entendeu a logica? 
+```
+
+
+```{r}
+quais2 <- c8 != c7 # quais elementos são comuns dos dois vetores?
+class(quais2)
+iguais <- c7[quais2] # entendeu a lógica? 
+```
+
+
+
+| **Operador lógico** |   **Significado**   |
+|:-------------------:|:-------------------:|
+|          <          |      menor que      |
+|          >          |      maior que      |
+|          <=         |  menor ou igual que |
+|          >=         |  maior ou igual que |
+|          ==         |       igual a       |
+|          !=         |     diferente de    |
+|       is.na ()      | Elementos ausentes? |
+
+
+
+### Caracteres especiais
+```{r}
+ce <- NA # NA = not available; ausência de dados
+ce
+ce <- c(1, 2, NA, 3) # Note que os elementos do vetor "ce" foram substituidos
+ce
+is.na(ce) # verifique se há NA em um objeto
+is.na(ce) <- 2 # substitua NA por 2
+```
+
+
+
+**Importante:** vetores podem ter somente um tipo principal de dado: _numéricos_ **OU** _caracteres_ **OU** _lógicos_
+```{r}
+v7 <- c(5, 6, 7)
+v7
+class(v7)
+```
+
+
+```{r}
+v8 <- c(1, 2, 3, "a")
+v8
+class(v8) # Note que todos elementos foram transformados em caracteres
+```
+
+
+Entretanto, podemos usar NA para indicar ausência de dados sem alterar o tipo de dado do vetor
+```{r}
+v9 <- c(1, 2, NA, 4, NA, 6)
+v10 <- c("a", "b", NA, "d")
+v9
+class(v9)
+v10
+class(v10)
+```
+
+
+<!-- ################################## Parte as.factor...as.numeric....########################################       -->
+
+### Indexação de vetores
+Usamos indexação para selecionar um subconjunto de elementos de um vetor, de acordo com a **posição** ou um **valor (condição)**. Colchetes **[]** são usados para selecionar elementos de um vetor.
+
+
+#### Indexação por posição
+
+```{r}
+letras <- rep(letters, 4)
+letras
+letras[13] # 13 elemento do vetor
+letras[2]
+```
+
+          
+```{r}
+v3.1 <- c(1, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28)
+
+v3.1[5] # quinto elemento do vetor
+v3.1[10] # décimo elemento do vetor
+v3.1[c(2:5)] # elementos na segunda a quinta posicao
+v3.1[c(1, 12)] # selecionar apenas o primeiro e terceiro elemento
+```
+
+
+Você também pode usar um sinal negativo (-) para retornar todos elementos exceto aqueles indicados
+```{r}
+v3.1[-1] # todos menos o primeiro elemento
+v3.1[-c(1:10)] # todos menos os dez primeiros elementos
+v3.1[-c(1, 3)] # todos menos os tres primeiros elementos 
+```
+
+
+Também é possível substituir elementos em um vetor de acordo com sua **posição**
+```{r}
+v3.1
+v3.1[9]
+v3.1[9] <-100 # substituir o elemento na posição 9 por 100
+v3.1[9]
+
+letras[1] <- "primeiro"
+```
+
+
+
+#### Indexação por condição
+
+
+```{r}
+v4 <- rep(1:15, times = 3)
+v4
+```
+
+
+Diferente de selecionar um elemento de acordo com sua posição, agora repetimos o nome do vetor dentro dos colchetes para selecionar elementos de acordo com uma condição. Note que usaremos _vetores lógicos_ para selecionar subconjuntos de elementos de um vetor que satisfazem a uma condição. 
+
+
+```{r}
+v4 == 1 # Elementos iguais a "TRUE" são selecionados e aqueles iguais a "FALSE" são descartados
+v4[v4 == 1] # Quais valores de v4 são iguais a 1
+```
+
+       
+```{r}
+
+v4[v4 >= 3] # valores maiores ou iguais a 3
+v4[v4 > 3] # valores maiores que 3
+v4[v4 != 1] # valores diferentes de 1
+v4[v4 > 3 & v4 < 7] # valores maiores que 3 e menores que 7
+```
+
+
+Também é possível substituir elementos em um vetor de acordo com uma **condição**
+  
+```{r}
+v4.1 <- v4 # criamos um vetor igual a v4
+v4.1 >= 10
+v4.1
+v4.1[v4.1 >= 10] <- 999 # substituir elementos maiores do que 10 por 999
+v4.1
+v4.1[] <-v4.1 ^ 2 # substituir cada elemento pelo seu valor elevado ao quadrado
+v4.1
+```
+
+        
+** Funções úteis **
+
+Explorando as funções **rep** e **seq**
+```{r}
+v4 <- rep (1:15, times = 3)
+v4
+
+v5 <- rep (1:15, each=3) #  Compare esse vetor com  "V4". Notou a diferenca?
+v5
+
+# A funcao "seq" e ":" produzem os mesmos resultados
+v6 <- seq(from =1,to= 15)
+v6
+
+v7 <- 1:15
+v7
+```
+
+
+
+-------------------------------------------------------------------------------------------------------------
+### Parte 2 -  Exercícios sobre vetores
+1. Crie um vetor chamado cncf com os seguintes elementos: Centro, Nacional, Conservação + flora
+2. Qual a classe do objeto cncf?
+3. Qual o tamanho do objeto cncf?
+4. Crie o seguinte vetor: letras <- rep(c("a", "b", "c", "D", "E"), 50)
+5. No vetor "letras" substitua "D" por d
+
+6. Considere os seguintes vetores
+x <- c(4,5,6,8,14,21,25)
+y <- c(1,2,6,8,14,25,31)
+
+  * a. Qual o valor de x * y
+  * b. Qual a media, o valor máximo e minimo de x
+  * c. Crie um vetor "z" e concatene x e y
+  * d. Quais valores de "z" são menores que 20?
+  * e. Substitua os valores de "z" menores que 20 por 1
+
+7. Crie um vetor numérico com nome "v.50" com sequencia de 1 a 50; calcule a media e o desvio padrão desse vetor;
+  * a. Crie um nome objeto e exclua os 10 primeiros elementos do objeto "v.50"
+  * b. Some 1 a cada elemento do objeto "v.50"
+  * c. Substitua todos elementos de v.50 menores que 40 por zero
+  * d. Descubra quais elementos de v.50 são iguais a 1. Substitua estes elementos pelo vigésimo elemento de v.50  
+-------------------------------------------------------------------------------------------------------------
+
+
+### Matrizes
+
+Matrizes são formadas por vetores organizados na forma de linhas e colunas. Diferentemente de "data frame", uma matriz contem vetores de apenas **um** tipo de elemento, isto é, apenas números, OU caracteres OU elementos lógicos.
+
+Lembre-se: uma matriz é formada por vetores. Vamos criar uma matriz a partir de vetores
+
+```{r}
+ve.1 <- c(1, 3, 6, 9, 10)
+ve.2 <- c(6, 2, 10, 5, 7)
+class(ve.1)
+```
+
+    
+```{r}
+m1 <- rbind(ve.1, ve.2) # agrupar vetores por linhas
+m1
+class(m1)
+dim(m1) # qual a dimensão (número de linhas e colunas) da matriz?
+```
+
+    
+```{r}
+m2 <- cbind(ve.1, ve.2) # agrupar vetores em colunas
+m2
+dim(m2)
+```
+
+    
+Funções cbind e rbind. Dê uma olhada nessas funções
+```{r eval= FALSE}
+?cbind
+?rbind
+```
+
+Perceba o que acontece quando tentamos criar uma matriz com vetores de tamanhos diferentes...
+```{r}
+ve.3 <- ve.1 # criamos um novo vetor igual a ve.1
+ve.3 <- ve.3[-1] # removemos o primeiro elemento
+m3 <- cbind(ve.1, ve.3) 
+```
+
+
+Vamos criar uma "matriz vazia", sem valores usando a funcao "matrix"
+```{r}
+matrix(ncol=2, nrow=2)
+```
+
+```{r}
+m.col <- matrix(1:4, ncol=2, nrow=2) #  valores distribuidos por colunas
+```
+
+
+```{r}
+m.lin <- matrix(1:4, ncol=2, nrow=2, byrow=T) # valores distribuidos por linhas
+```
+
+
+Transpor uma matriz
+```{r}
+t(m.lin) # transpor a matriz 
+```
+
+Também é possível criar uma matriz de caracteres (texto)
+```{r}
+fill <- c("a", "b", "c", "d")
+mat.2 <- matrix(fill, ncol = 2, nrow = 2)
+class(mat.2) 
+```
+
+
+Nomear linhas e colunas
+```{r}
+colnames(m1) # nome das colunas
+rownames(m1) # nome das linhas
+```
+
+
+```{r}
+rownames(m1) <- c('plantas', 'animais')
+colnames(m1) <- c('amostra1', 'amostra2', 'amostra3', 'amostra4', 'amostra5')
+m1
+```
+
+
+Também e possivel alterar o nome das colunas e linhas
+```{r}
+rownames(m1) <- c("Fabaceae", "Myrtaceae")
+```
+
+
+
+### Indexação de matrizes 
+Da mesma forma que usamos indexação para manipular vetores, podemos usar indexador **[]** para manipular uma matriz
+
+**DICA:** Ao usarmos o indexador para manipular matrizes, as linhas estão sempre à esquerda da vírgula e colunas à direita da virgula 
+
+**m[linhas,colunas]** 
+
+Vamos analisar alguns exemplos de indexação por posição (dúvida? volte a seção anterior e relembre a diferença em indexadores de posição e condição) 
+```{r}
+m1
+m1[5] # retorna o quinto elemento da matriz
+m1[2,2] # elemento da segunda linha e segunda coluna
+m1[,2] #  segunda coluna
+m1[1,] # primeira linha
+m1[1:2,] # duas primeiras linhas
+m1[1,2] + m1[1,1]
+```
+
+
+Substituir valore em uma matriz
+```{r}
+m1[2, 1] <- NA # Substituir valore em uma matriz
+m1
+```
+
+
+```{r}
+col1 <- sample(c("contratado", "demitido"), 30, replace = T)
+col2 <- sample(c("homem", "mulher"), 30, replace = TRUE)
+col3 <- sample(c(18:47), 30, replace = T)
+
+funcionarios <- cbind(col1, col2)
+funcionarios
+```
+
+
+```{r}
+class(funcionarios)
+```
+
+
+A função _table_ é bastante útil e retorna uma tabela de contingência, isto é, o número de observação de cada variável ou fator
+```{r}
+table(funcionarios)
+```
+
+
+Agora vamos selecionar os resultados para _homem_ e descobrir a quantidade _contratado_ e _demitido_
+```{r}
+func.H <- funcionarios[funcionarios[, 2] == "homem" ]
+class(func.H)
+```
+
+
+
+```{r}
+func.H
+table(func.H)
+```
+
+    
+** Faça você mesmo!**
+1. No data frame _"funcionarios"_ descubra quantas mulheres foram demitidas?  
+2. selecione os dados somente de homens **e** contratados. **DICA:** Use a função **&**  
+
+
+Mais um exemplo    
+```{r}
+func.age <- data.frame(col1, col2, col3)
+head(func.age) # Usamos a função _head_ para mostrar apenas o cabeçalho de uma tabela
+head(func.age[func.age[, 3] > 30, ])
+head(func.age[func.age[, 3] > 30 & func.age[, 2] == "mulher", ])
+```
+
+
+** Funções úteis **
+
+Você também pode usar funcoes do R para calcular algumas estatisticas descritivas de uma tabela
+
+```{r results='hide'}
+colSums(m1) # soma de cada coluna
+rowSums(m1) # soma de cada linha
+colMeans(m1) # media de cada coluna
+rowMeans(m1) # media de cada linha
+nrow(m1) # numero de linhas da matriz
+ncol(m1) # numero de colunas da matriz
+```
+
+
+
+### Data frames
+    
+Diferentemente de matrizes, data frames são tabelas que podem conter diferentes tipos de dados (númericos, categóricos e lógicos)
+
+Um objeto da classe "matrix" pode ser transformado em "data frame"
+    
+```{r}
+df <-  as.data.frame(m2) # usamos uma funcao coercitiva para transformar m1 em data frame
+class(m2)
+class(df)
+```
+
+
+Vamos criar alguns vetores
+```{r}
+nome <- c("Carlos", "Rosangela", "Carla", "Jean")
+sobrenome <- c("Roberto", "Claudete", "Lays", "Paul")
+idade <- c(57, 46, 26, 27)
+sexo <- c("masculino", "feminino")
+id <- 1:length(idade)
+```
+
+
+A partir desses vetores vamos criar algumas tabelas (matriz e/ou data frame)
+```{r}
+m2 <- cbind(nome, sobrenome)
+m2
+class(m2)
+dim(m2)
+```
+
+```{r}
+m3 <- cbind(nome, sexo) # Note que quando concatenamos vetores de diferentes tamanhos o R recicla (repete) elementos do vetor de menor tamanho
+class(m3)
+```
+
+
+Note a diferença entre matriz e data frame
+```{r}
+m4 <- cbind(nome, sobrenome, idade)
+class(nome)
+class(sobrenome)
+class(idade)
+m4
+class(m4) # note que o vetor "idade" do tipo numerico foi transformado em texto
+
+```
+
+
+
+```{r}
+df4 <- data.frame(nome, sobrenome, idade)
+df4
+class(df4) # Perceba que duas primeiras variaveis foram transformadas em fatores
+class(df4[, 1]) # Perceba que duas primeiras variaveis foram transformadas em fatores
+```
+
+
+Para evitar que uma variável categórica seja transformada em fator faça use o seguinte argumento na função _data.frame_
+```{r}
+df4.1 <-  data.frame(id, nome, sobrenome, idade, sexo, stringsAsFactors = F)
+str(df4.1) # Agora todos vetores foram agrupados em um data frame mantendo seus tipos
+```
+
+
+Para manipular dados de um data.frame podemos usar o sinal **$** para selecionar partes de um dataframe por meio do nome de uma coluna
+```{r}
+df4.1$id
+df4.1$nome
+df4.1$nome == "Carlos"
+```
+
+
+```{r}
+df4.1[df4.1$nome == "Carlos",] # A presenca da virgula indica que estamos selecionando a linha que satisfaz a condicao nome == "Carlos"
+df4.1[df4.1[,2] == "Carlos",] # Compare o uso de $ e []. Alguma diferenca?
+```
+
+
+
+```{r}
+df4.1[1:3]
+df4.1[df4.1$idade >= 30]
+```
+
+    
+Não se esqueça que data.frames assim como matrizes são acessadas por dois índices [linhas,colunas]
+```{r}
+df4.1[df4.1$idade >= 30, ]
+df4.1[c(1, 3), ]
+df4.1[c(1:3), ]
+df4.1[, c("id", "nome")]
+df4.1[c("id", "nome")]
+```
+
+
+O R possui uma funcao para selecionar elementos de uma matriz ou dataframe
+```{r}
+?subset
+subset(df4.1, nome == "Carlos")
+```
+
+
+
+Após criar estas tabelas, voce seria capaz de dizer a diferenca ente objeto da classe matriz e data frame?
+A resposta é simples: Uma matriz pode ser feita apenas com objetos do mesmo tipo (ex., apenas vetores numéricos);
+Um data frame aceita objetos de todos os tipos (numéricos, categóricos, lógicos).
+
+-------------------------------------------------------------------------------------------------------------
+### Exercicios parte 2 - matrizez e dataframes  
+
+1. Crie um data frame com as colunas "col1","col2" e "col3" criadas anteriormente e salve em um objeto
+  * a. Remova os fatores do data.frame
+  * b. Descubra qual a dimensão do data.frame
+  * c. Selecione somente a primeira linha do data.frame
+  * d. Utilize a função "subset" para criar um novo objeto que contenha somente a idade dos funcionários demitidos 
+
+3. Crie a seguinte tabela:
+
+| Nome     | Idade | Altura | Peso | Sexo |
+|----------|-------|--------|------|------|
+| Carol    | 39    | 186    | 68   | F    |
+| Fernando | 65    | 188    | 54   | F    |
+| Marina   | 70    | 160    | 74   | F    |
+| Nathália | 74    | 170    | 70   | F    |
+| André    | 39    | 174    | 80   | M    |
+| Maria    | 33    | 162    | 55   | F    |
+| Alice    | 51    | 168    | 63   | F    |
+
+
+  * a.Use a função "head" para visualizar o nome das colunas e as primeiras linhas de dados da tabela
+  * b. Inverta o sexo de todos os individuos
+  * c. Adicione ao data frame criado anteriormente uma coluna chamada "trabalho" com os seguintes dados: trabalho<-        c("sim","não","não","sim","sim","não","sim")
+  * d. Qual a classe desse novo objeto? transforme esse objeto em um data frame se já não for.
+  * e. Renomeie as colunas do data frame com as inicias de cada coluna
+  * f. Remova a variável sexo e Idade  do data frame
+  * g. Adicione uma linha com seus dados ao data.frame
+  * h. Ordene a tabela de acordo com a coluna idade. Dica: use a função "order"
+-------------------------------------------------------------------------------------------------------------    
+     
+
+### LISTAS
+    
+Uma lista pode conter objetos de diferentes classes (ex., matrizes e vetores), tipos (números e caracteres) e tamanhos
+
+Primeiro vamos criar alguns objetos de tiferentes tipos e classes
+```{r}
+l0 <- c("Ocotea odorifera", "Myrcia splendens", "Siparuna guianenses", "Psycotria vellosiana")
+class(l0)
+```
+
+```{r}
+l1 <- c(20, 30, 40, NA)
+class(l1)
+```
+
+
+```{r}
+l2 <- matrix(runif(20, min = 0, max = 1), nrow = 4, ncol = 5)
+class(l2)
+```
+
+
+```{r}
+l3 <- data.frame(l0, l1)
+class(l3)
+```
+
+
+Agora vamos criar uma _lista_ de objetos
+```{r}
+lista.dados <- list(l0, l1, l2, l3)
+class(lista.dados)
+length(lista.dados)
+```
+
+
+Estes são os objetos armazenados na lista
+```{r}
+lista.dados
+```
+
+
+Vamos aprender a diferença entre usar [] ou [[]] em para acessar objetos em uma lista
+```{r}
+class(lista.dados[1])
+class(lista.dados[[1]])
+```
+
+
+
+Com o uso de colchetes simples podemos selecionar mais de um elemento da lista
+```{r}
+lista.dados[c(1,3)] # Selecionar os objetos 1 e 3 da lista
+```
+
+  
+**DICA:** Imagine que uma lista seja um trem. Use o sinal [[]] para acessar a posição dos vagoões do trem, ou seja, cada um dos objetos em uma lista. Mas caso você queira entrar no vagão e descobrir o que há dentro dele, isto é, extrair dados de um objeto presente em uma lista, você deve usar o sinal [] depois de indicar o vagão, isto é, o objeto na lista.
+
+
+Vamos analisar alguns exemplos
+```{r}
+lista.dados[[2]] # o segundo objeto
+lista.dados[[3]] # o terceiro objeto
+lista.dados[[4]] #  o quarto objeto
+lista.dados[[4]][1, ] # a primeira linha do quarto objeto
+```
+
+
+**Lembre-se**: uma lista e um objeto com uma única dimensão similar a um vetor. Use [[]] para indicar o objeto em uma lista, e depois use [] da mesma forma que usamos para manipular vetores, matrizes e data frames.
+
+
+```{r}
+is.na(lista.dados) # nenhum objeto da lista e NA
+is.na(lista.dados[[2]])
+is.na(lista.dados[[4]][, 2])
+```
+
+
+Dúvida? Vamos analisar mais alguns exemplos...
+```{r}
+lista.dados[[1]][3] # terceiro elemento do primeiro objeto da lista
+colSums(lista.dados[[3]]) # soma das colunas do terceiro objeto
+median(lista.dados[[3]][, 2]) # mediana da segunda coluna do terceiro objeto
+```
+
+
+```{r}
+lista.dados[[2]][3] # terceiro elemento do segundo objeto da lista
+lista.dados[[2]][3] <-35 # substituir o terceiro elemento do segundo objeto por 35
+lista.dados[[2]]
+lista.dados[[2]] + 1
+lista.dados[[2]][c(1, 2)]    # o objeto nesse "vagão" é um vetor
+lista.dados[[4]][c(1, 2), ]   # O objeto nesse "vagão" é uma matriz, então acesse como se fosse acessar uma matriz
+```
+
+
+Podemos nomear objetos em uma lista usando a função _names_
+```{r}
+names(lista.dados) <- c("vetor_de_caracteres", "vetor_numerico", "Uma_matriz", "Um_data_frame")
+```
+
+
+Uma vez queos objetos na lista possuam nomes, podemos selecioná-los usando _$_
+```{r}
+lista.dados$Uma_matriz
+lista.dados$vetor_de_caracteres
+lista.dados$Um_data_frame
+lista.dados$Um_data_frame[1, 2]
+lista.dados$Um_data_frame [, 1]
+lista.dados$vetor_numerico[1]
+```
+
+
+** Funções úteis **
+```{r}
+mediana <- median(lista.dados[[2]], na.rm = T)
+soma <- sum(lista.dados[[2]], na.rm = T)
+```
+
+
+Adicionar outros objetos a uma lista
+```{r}
+lista.dados.2 <- c(lista.dados, mediana, soma) # adicionar novos objetos a uma lista
+```
+
+
+Desvincular itens de uma lista
+```{r}
+rm.lista <- unlist(lista.dados)
+class(rm.lista)
+```
+
+-------------------------------------------------------------------------------------------------------------    
+### Exercicios Parte 2 - lista
+
+1. Crie uma lista com os seguintes objetos:  
+  * year=c(2005:2016)
+  * month=c(1:12)
+  * day=c(1:31)
+  
+  * a. Substitua os valores do elemento "year" por valores de 2000 a 2010
+  * b. Delete o quarto valro do elemento "month" 
+  * c. Crie o vetor x=c(1,3,4,7,11,18,29), insira na lista anterior os valores  da rais quadrada de x
+  * d. Crie uma sublista com o primeiro, terceiro e quarto elemento
+  * e. Descubra qual o tamanho do quinto elemento
+    
+2. Crie um vetor de números, uma tabela 4x4 de caracteres e um vetor lógico de tamanho 3  
+  * a. Crie uma lista com o vetor de número e o vetor lógico
+  * b. Crie uma lista com a tabela 4x4 e o vetor numérico
+  * c. Faça uma única lista com todos os elementos
+  * d. Acesse o primeiro valor da tabela 4x4
+  * e. Dê nomes aos objetos da lista
+  * f. Acesse o primeiro elemento da lista pelo nome
+  * g. Calcule a soma das colunas das tabela 4x4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+    
+    
+    
+
+<!-- # Conversão de objetos -->
+
+<!--     # Eventualmente ao trabalhar com matrizes e data.frames é possível que alguns dos seus dados -->
+<!--     # seja "entendido" pelo R como um tipo diferente do que você espera -->
+
+<!--     install.packages("randomNames") -->
+<!--     library(randomNames) -->
+
+<!--     nomes <- unique(randomNames(n=30,which.names="first")) -->
+
+<!--     col1<-sample(c("contratado","demitido"),30,replace=T) -->
+<!--     col2<-sample(c("homem","mulher"),30,replace=TRUE) -->
+<!--     col3<-sample(c(18:47),30,replace=T) -->
+<!--     names<-c("Jeremy","Jule","Ilyaas","Armando","Jeremiah","Brandon","Karen","Quincie",   -->
+<!--     "Janice","Faseeha","Robert","Kali","Westley","Kami","Michael","Carlos","Lucia", -->
+<!--     "Tyler","Kelvin","Jalen","Ryan","Shayla","Christina","Naadiya","Sultana","Kamoni", -->
+<!--     "Munjid","David","Manuel","Avishek") -->
+
+<!--     funcionarios<-data.frame(col1,col2,col3,names) -->
+<!--     funcionarios -->
+<!--     class(funcionarios) -->
+<!--     str(funcionarios) -->
+
+<!--     # Não faz sentido que o nome do funcionário seja um fator, o nome não me indica nível -->
+<!--     # então transformamos o vetor de nomes para caractere -->
+
+<!--     funcionarios[,4]<-as.character(funcionarios[,4]) -->
+<!--     str(funcionarios)     -->
+<!--     funcionarios$names<-as.character(funcionarios$names) -->
+<!--     funcionarios[,"names"]<-as.character(funcionarios[,"names"]) -->
+
+<!--     niveis.perigo<-sample(1:5,25,replace=T) -->
+<!--     local<-c(1:25) -->
+
+<!--     perigo<-data.frame(local,niveis.perigo) -->
+<!--     str(perigo) # a coluna niveis.perigo foi ententida como número, quando o que queríamos era um fator de periculosidade -->
+
+<!--     # podemos fazer a transformação e depois inserir no data.frame -->
+<!--     fac.niveis<-as.factor(niveis.perigo) -->
+<!--     perigo[,2]<-  fac.niveis -->
+<!--     str(perigo) -->
+
+<!--     # podemos inserir diretamente na tabela o vetor transformado -->
+<!--     perigo[,2]<- as.factor(niveis.perigo) -->
+
+
+<!--     #Existem mais de 90 funções para transformações de classes de objeto no R -->
+<!--     # Abaixo segue uma lista com as mais usadas -->
+
+<!--     #Função                     Tipo de transformação -->
+<!--     #as.character()         Converte para a classe "character" -->
+<!--     #as.integer()           Converte para a classe "integer" -->
+<!--     #as.numeric()           Converve objetos para a classe "numeric" -->
+<!--     #as.factor()            Converte vetores e matrizes para a classe "factors" -->
+<!--     #as.vector()            Transforma matrizes em vetores -->
+<!--     #as.matrix()            Converte vetores e data.frames em matrizes -->
+<!--     #as.data.frame()        Transforma mstrizes em data frames -->
+<!--     #as.list()              Transforma matrizes em listas -->
